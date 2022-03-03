@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<main>
+  <section>
+    <div class="conatiner">
+      <form action="/expense/<%= expense.id %>" class="form" method="POST">
+        <input
+          type="text"
+          name="expname"
+          placeholder="Enter Expense Name"
+          value="<%= expense.expname %>"
+        />
+        <input
+          type="text"
+          name="category"
+          placeholder="Enter the Expense Category"
+          value="<%= expense.category %>"
+        />
+        <input
+          type="number"
+          name="amount"
+          placeholder="Amount"
+          value="<%= expense.amount %>"
+        />
+        <input type="date" name="date" />
+        <input type="submit" value="Add Expense" />
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
