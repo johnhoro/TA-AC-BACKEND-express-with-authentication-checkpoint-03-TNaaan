@@ -247,6 +247,10 @@ h3 {
   margin: 1rem 0;
   color: green;
 }
+
+.forget {
+  padding: 1rem;
+}
 .start-btn a {
   padding: 0.3rem 0.8rem;
   background-color: rgb(121, 87, 44);

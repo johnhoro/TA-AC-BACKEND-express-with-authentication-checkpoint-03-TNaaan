@@ -61,7 +61,7 @@ router.post("/", (req, res, next) => {
         "<h3>OTP for account verification is </h3>" +
         "<h1 style='font-weight:bold;'>" +
         otp +
-        "</h1>", // html body
+        "</h1>",
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -121,7 +121,7 @@ router.post("/forgot", (req, res, next) => {
         "<h3>OTP for account verification is </h3>" +
         "<h1 style='font-weight:bold;'>" +
         otp +
-        "</h1>", // html body
+        "</h1>",
     };
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
@@ -169,53 +169,6 @@ router.post("/:id/verifyOtp/forgot", (req, res, next) => {
       );
     }
   });
-});
-
-router.get("/:id/setPassword", (req, res, next) => {
-  console.log("mnhjbhmv");
-  EmailVerify.findById(req.params.id, (err, content) => {
-    if (err) return next(err);
-    res.render("newPassword", {
-      error: req.flash("error"),
-      data: content,
-      id: content._id,
-    });
-  });
-});
-
-router.post("/:id/setPassword", (req, res, next) => {
-  if (req.body.password === req.body.confirmpassword) {
-    User.findOne({ email: req.body.email }, (err, user) => {
-      if (err) return next(err);
-      if (user) {
-        console.log(user);
-        bcrypt.hash(req.body.password, 10, (err, hashed) => {
-          if (err) return next(err);
-          console.log(hashed);
-          // user.password = hashed
-          // console.log(user.password)
-          // user.save((err, content)=> {
-          //   console.log(user,"save")
-          //   res.redirect('/users/login')
-          // })
-
-          User.findByIdAndUpdate(
-            user._id,
-            { password: hashed },
-            { new: true },
-            (err, updateContent) => {
-              if (err) return next(err);
-              console.log(updateContent);
-              res.redirect("/users/login");
-            }
-          );
-        });
-      } else {
-        req.flash("error", "this user is not exist");
-        res.redirect("/verifyEmail/" + req.params.id + "/setPassword");
-      }
-    });
-  }
 });
 
 module.exports = router;
