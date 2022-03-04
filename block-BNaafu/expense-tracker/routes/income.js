@@ -10,8 +10,7 @@ router.get("/:id", (req, res, next) => {
   Income.findById(id, (err, income) => {
     if (err) return next(err);
     console.log(income);
-    let date = moment(income.date).format("DD/MM/YYYY");
-    console.log(date);
+    const date = new Date(income.date).toISOString().split("T")[0];
     res.render("incomeDetails", { income, date });
   });
 });
@@ -22,11 +21,8 @@ router.get("/:id/edit", (req, res, next) => {
   Income.findById(id, (err, income) => {
     if (err) return next(err);
     income.sources = income.sources.join(" ");
-    console.log(income.date.toISOString());
-    res.render("incomeEditPage", {
-      income,
-      date: income.date.toISOString(),
-    });
+    const date = new Date(income.date).toISOString().split("T")[0];
+    res.render("incomeEditPage", { income, date });
   });
 });
 
@@ -55,4 +51,5 @@ router.get("/:id/delete", (req, res, next) => {
     );
   });
 });
+
 module.exports = router;

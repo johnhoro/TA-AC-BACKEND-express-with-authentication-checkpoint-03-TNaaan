@@ -9,11 +9,7 @@ router.get("/:id", (req, res, next) => {
   let id = req.params.id;
   Expense.findById(id, (err, expense) => {
     console.log(expense);
-    // if (err) return next(err);
-    // let date = moment(expense.date).format("DD/MM/YYYY");
-    let now = new Date();
-    var date = moment(now).format("YYYY-MM-DD");
-    console.log(date); // Output: 2020-07-21.
+    const date = new Date(expense.date).toISOString().split("T")[0];
     res.render("expenseDetails", { expense, date });
   });
 });
@@ -24,7 +20,8 @@ router.get("/:id/edit", (req, res, next) => {
   Expense.findById(id, (err, expense) => {
     if (err) return next(err);
     expense.category = expense.category.join(" ");
-    res.render("expenseEditPage", { expense });
+    const date = new Date(expense.date).toISOString().split("T")[0];
+    res.render("expenseEditPage", { expense, date });
   });
 });
 //edit expense

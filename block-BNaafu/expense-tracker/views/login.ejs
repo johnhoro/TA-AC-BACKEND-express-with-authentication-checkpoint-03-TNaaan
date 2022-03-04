@@ -4,7 +4,7 @@
   <section>
     <div class="container">
       <div class="login-box">
-        <h1>Sign in</h1>
+        <h1>Login</h1>
         <form action="/users/login" class="form" method="POST">
           <% if (ep) { %>
           <p><%= ep %></p>
@@ -21,16 +21,18 @@
             placeholder="arya@stark.com"
           />
           <label for="text">Password</label>
-          <a href="/verifyEmail/forgot">Forget password</a>
           <input
             id="password"
             type="password"
             name="password"
             placeholder="Enter your password"
           />
-          <input class="btn" type="submit" />
+          <input class="btn" type="submit" value="Login" />
         </form>
         <hr />
+        <div class="center forget">
+          <a href="/verifyEmail/forgot">Forget password ?</a>
+        </div>
         <p class="center">
           Don't have an account? <a href="/users/signup">Sign up</a>
         </p>

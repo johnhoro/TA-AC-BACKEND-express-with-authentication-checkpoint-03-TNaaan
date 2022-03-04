@@ -6,8 +6,6 @@ let User = require("../models/User");
 let moment = require("moment");
 
 router.use((req, res, next) => {
-  let expenses = [];
-  let incomes = [];
   let date = new Date();
   let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
   let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
